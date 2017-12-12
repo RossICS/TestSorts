@@ -10,8 +10,9 @@ package testsorts;
   * Sort algorithms are tested.
   */
  
- import java.util.Scanner;
+ import static java.lang.System.currentTimeMillis;
  import java.util.Random;
+import java.util.Scanner;
  
  public class TestSorts {
  	
@@ -27,6 +28,9 @@ package testsorts;
 		int numItems, searchNum, location;
 		int[] test;
 		Random rand = new Random();
+                double start=0;
+                double finish=0;
+                double total=0;
 		
 		System.out.print("Enter number of elements: ");
 		numItems = input.nextInt();
@@ -38,19 +42,27 @@ package testsorts;
 		}
 		System.out.println("Unsorted:");
 		displayArray(test);
-		
-		Sorts.selectionSort(test);
-		//Sorts.insertionSort(test);
+		start = currentTimeMillis();
+                //Sorts.selectionSort(test);
+                Sorts.insertionSort(test);
 		//Sorts.mergesort(test, 0, test.length - 1);
+                finish = currentTimeMillis();
+                total = finish - start;
 		
-		System.out.println("Sorted:");
-		displayArray(test);
 		
+		
+//		System.out.println("Sorted:");
+//		displayArray(test);
+		System.out.println("The time taken is:" + total + " ms");
 		/* search for number in sorted array */
 		System.out.print("Enter a number to search for: ");
 		searchNum = input.nextInt();
 		while (searchNum != -1){
+                        start = currentTimeMillis();
 			location = Searches.binarySearch(test, 0, test.length-1, searchNum);
+                        finish = currentTimeMillis();
+                        total = finish - start;
+                        System.out.println("The time taken is:" + total + " ms");
 			System.out.println("Number at position: " + location);
 			System.out.print("Enter a number to search for: ");
 			searchNum = input.nextInt();
@@ -93,5 +105,6 @@ package testsorts;
  	
 	public static void main(String[] args) {
 		sortIntArray();
+                //sortObjectArray();
 	}
 }
